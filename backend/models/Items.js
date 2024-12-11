@@ -5,7 +5,7 @@ const itemSchema = new mongoose.Schema({
   description: { type: String, required: true },
   price: { type: Number, required: true },
   image: { type: String, required: true }, // URL or base64-encoded image string
-  owner: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  owner: { type: String, required: true },
   status: { type: String, enum: ['available', 'sold'], default: 'available' },
   createdAt: { type: Date, default: Date.now }
 });

@@ -1,6 +1,6 @@
 // routes/items.js
 const express = require('express');
-const Item = require('../models/Item');
+const Item = require('../models/Items.js');
 const router = express.Router();
 
 // Create a new item
@@ -8,6 +8,7 @@ router.post('/', async (req, res) => {
   const { name, description, price, image, owner } = req.body;
   try {
     const newItem = new Item({ name, description, price, image, owner });
+    // console.log(newItem);
     await newItem.save();
     res.status(201).json(newItem);
   } catch (err) {

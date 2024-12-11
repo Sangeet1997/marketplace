@@ -55,4 +55,15 @@ router.get('/user/:id',Auth,async(req,res)=>{
   }
 });
 
+// Get all users
+router.get('/users', Auth, async (req, res) => {
+  try {
+    const users = await User.find({}, 'id username email'); // Fetch all users with only username and email fields
+    res.json(users);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
+
 module.exports = router;
