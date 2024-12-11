@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 const PORT = process.env.PORT || 3000;
 
 // MongoDB connection URI
-const mongoURI = 'mongodb://localhost:27017/marketplacewDB';
+const mongoURI = 'mongodb://127.0.0.1:27017/marketplacewDB';
 
 // Connect to MongoDB
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })

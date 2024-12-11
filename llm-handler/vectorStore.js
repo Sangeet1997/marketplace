@@ -2,7 +2,7 @@ const { ChatOllama } = require("@langchain/ollama");
 const { OllamaEmbeddings } = require("@langchain/community/embeddings/ollama");
 const { RecursiveCharacterTextSplitter } = require("langchain/text_splitter");
 const { MemoryVectorStore } = require("langchain/vectorstores/memory");
-const pdf = require('pdf-parse');
+// const pdf = require('pdf-parse');
 const fs = require('fs');
 const path = require('path');
 
@@ -25,20 +25,20 @@ class OllamaRAGAssistant {
   }
 
   // for PDF
-  async loadDocumentsFromDirectory(directoryPath) {
-    const documents = [];
-    const files = fs.readdirSync(directoryPath);
+//   async loadDocumentsFromDirectory(directoryPath) {
+//     const documents = [];
+//     const files = fs.readdirSync(directoryPath);
 
-    for (const file of files) {
-      const filePath = path.join(directoryPath, file);
-      let dataBuffer = fs.readFileSync(filePath);
-      await pdf(dataBuffer).then(function(data) {
-        documents.push(data);
-      });
-    }
-    console.log("Loaded documents from directory.");
-    return documents;
-  }
+//     for (const file of files) {
+//       const filePath = path.join(directoryPath, file);
+//       let dataBuffer = fs.readFileSync(filePath);
+//       await pdf(dataBuffer).then(function(data) {
+//         documents.push(data);
+//       });
+//     }
+//     console.log("Loaded documents from directory.");
+//     return documents;
+//   }
 
   // for text
   async loadDocumentsFromDirectoryText(directoryPath) {

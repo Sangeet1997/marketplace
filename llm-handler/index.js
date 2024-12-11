@@ -58,7 +58,7 @@ const loadVectorStore = async () => {
   }
 }
 
-loadVectorStore();
+// loadVectorStore();
 
 
 const similaritySearch = async (query, k = 5) => {

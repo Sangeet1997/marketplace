@@ -1,20 +1,46 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
+import axios from 'axios';
+
 
 const Chatbot = ({ onClose }) => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
 
-  const handleSendMessage = () => {
+  const welcomeMsg = () => {
+    setMessages([
+      { sender: 'bot', text: 'Hello! How can I assist you today?' },
+    ]);
+  }
+
+  useEffect(() => {
+    welcomeMsg();
+  }, []);
+  
+
+
+  const handleSendMessage = async () => {
     if (input.trim()) {
-      setMessages([...messages, { sender: 'user', text: input }]);
-      setInput('');
-      // Simulate bot response
-      setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { sender: 'bot', text: 'This is a bot response.' },
-        ]);
-      }, 1000);
+      const updatedMessages = [...messages, { sender: 'user', text: input }];
+    setMessages(updatedMessages);
+    setInput('');
+    
+    let prompt = [];
+    for (let message of updatedMessages) {
+      if (message.sender === 'user') {
+        prompt.push(["human", message.text]);
+      } else if (message.sender === 'bot') {
+        prompt.push(["assistant", message.text]);
+      }
+    }
+
+    const response = await axios.post('http://localhost:5000/chatcontext', { prompt });
+    console.log(response.data.reply.kwargs.content);
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { sender: 'bot', text: response.data.reply.kwargs.content },
+    ]);
+
     }
   };
 
