@@ -5,6 +5,13 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  image: { type: String },
+  soldItems: [{ 
+    type: mongoose.Schema.Types.ObjectId, 
+  }],
+  boughtItems: [{ 
+    type: mongoose.Schema.Types.ObjectId, 
+  }]
 });
 
 UserSchema.pre('save', async function (next) {

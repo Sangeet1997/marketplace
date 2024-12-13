@@ -5,9 +5,9 @@ const router = express.Router();
 
 // Create a new item
 router.post('/', async (req, res) => {
-  const { name, description, price, image, owner } = req.body;
+  const { name, description, price, image, owner, tag } = req.body;
   try {
-    const newItem = new Item({ name, description, price, image, owner });
+    const newItem = new Item({ name, description, price, image, owner, tag });
     // console.log(newItem);
     await newItem.save();
     res.status(201).json(newItem);
@@ -40,10 +40,10 @@ router.get('/:id', async (req, res) => {
 // Update an item
 router.put('/:id', async (req, res) => {
   try {
-    const { name, description, price, image, status } = req.body;
+    const { name, description, price, image, status, tag } = req.body;
     const item = await Item.findByIdAndUpdate(
       req.params.id,
-      { name, description, price, image, status },
+      { name, description, price, image, status, tag },
       { new: true }
     );
     if (!item) return res.status(404).json({ message: 'Item not found' });

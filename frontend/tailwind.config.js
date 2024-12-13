@@ -5,7 +5,14 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'light-bg': "url('./components/assets/light-background.png')",
+        'dark-bg': "url('./components/assets/dark-background.png')",
+      },
+    },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar')
+  ],
 }

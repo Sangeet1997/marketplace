@@ -90,6 +90,7 @@ app.post('/chatcontext', async (req, res) => {
   const { prompt } = req.body;
 
   try {
+    console.log(prompt);
       const response = await llm.invoke(prompt);
 
       console.log(response);
