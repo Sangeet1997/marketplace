@@ -58,21 +58,22 @@ function AddItemForm({ owner }) {
 
       const prompt = [];
 
-      const detailedPrompt = `Name: ${itemData.name}\nDescription: ${itemData.description}\nPredict the min price of this car in dollars\nGIVE ONLY NUMERICAL DATA, DON'T WRITE ANYTHING ELSE.`;
+      const detailedPrompt = `Name: ${itemData.name}\nDescription: ${itemData.description}\nPredict the max price of this car in dollars\nGIVE ONLY NUMERICAL DATA, DON'T WRITE ANYTHING ELSE.`;
       prompt.push(["human", detailedPrompt]);
 
-      const response = await axios.post('http://localhost:5000/chatcontext', { prompt });
+      const response = await axios.post('http://localhost:5000/chatrag', { prompt });
+      console.log(response)
 
-      prompt.push(["assistant", response.data.reply.kwargs.content]);
-      setMinPrice(response.data.reply.kwargs.content);
-      setNegotiatedPrice(response.data.reply.kwargs.content);
+      prompt.push(["assistant", response.data.reply]);
+      setMaxPrice(response.data.reply);
 
-      const detailedPrompt2 = `Predict the max price of this car in dollars\nGIVE ONLY NUMERICAL DATA, DON'T WRITE ANYTHING ELSE.`;
+      const detailedPrompt2 = `Predict the min price of this car in dollars. It should be 70% of the ${maxPrice}. \nGIVE ONLY NUMERICAL DATA, DON'T WRITE ANYTHING ELSE.DONT SHOW CALCULATIONS`;
       prompt.push(["human", detailedPrompt2]);
 
-      const response2 = await axios.post('http://localhost:5000/chatcontext', { prompt });
-      prompt.push(["assistant", response2.data.reply.kwargs.content]);
-      setMaxPrice(response2.data.reply.kwargs.content);
+      const response2 = await axios.post('http://localhost:5000/chatrag', { prompt });
+      prompt.push(["assistant", response2.data.reply]);
+      setMinPrice(response2.data.reply);
+      setNegotiatedPrice(response2.data.reply);
 
       setShowChat(true);
       setLoading(false);

@@ -58,7 +58,7 @@ const loadVectorStore = async () => {
   }
 }
 
-// loadVectorStore();
+loadVectorStore();
 
 
 const similaritySearch = async (query, k = 5) => {
@@ -137,7 +137,7 @@ app.post('/chatrag', async (req, res) => {
 app.get('/checkrag', async (req, res) => {
 
   try {
-      const response = await getResponseWithContext([["human","car with the following details	fwd	front	93.7	157.3	63.8	50.6	2191	ohc	four	98	mpfi	3.03	3.39	7.6	102	5500	24	30	should cost how much?"]]);
+      const response = await llm.invoke([["human","car with the following details	fwd	front	93.7	157.3	63.8	50.6	2191	ohc	four	98	mpfi	3.03	3.39	7.6	102	5500	24	30	should cost how much?"]]);
       
       console.log(response);
       res.json({ reply: response });
@@ -152,3 +152,4 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
+module.exports = app;
