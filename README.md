@@ -4,6 +4,10 @@
 
 FairTrader AI is an intelligent chatbot system designed for a marketplace where users can buy and sell cars while interacting with a conversational assistant named Dave. Dave guides users with navigation, predicts car prices, negotiates prices, and provides context-aware conversations using user purchase history.
 
+## Demo
+- Frontend demo: https://youtu.be/LPZE1T6YCU8
+- Backend explained: https://youtu.be/XHBs2u6TyF4
+
 ## Technologies Used
 
 ### Frontend
